@@ -1,4 +1,4 @@
-﻿namespace Battleships.Logic
+﻿namespace Battleships.Logic.Contracts
 {
     public class BoardCoordinates
     {

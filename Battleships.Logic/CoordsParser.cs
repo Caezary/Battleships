@@ -1,8 +1,9 @@
-﻿using Battleships.Logic.Exceptions;
+﻿using Battleships.Logic.Contracts;
+using Battleships.Logic.Exceptions;
 
 namespace Battleships.Logic
 {
-    public class CoordsParser
+    public class CoordsParser : IParseCoords
     {
         public BoardCoordinates Parse(string coordinates)
         {
