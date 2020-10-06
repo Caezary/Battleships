@@ -40,6 +40,16 @@ namespace Battleships.Logic.Tests
         }
         
         [Theory]
+        [InlineData("A0")]
+        [InlineData("B-1")]
+        public void Parse_RowCoordZeroOrLess_ThrowsError(string coords)
+        {
+            Action act = () => _sut.Parse(coords);
+
+            act.Should().Throw<MalformedCoordinateError>();
+        }
+        
+        [Theory]
         [InlineData("A2", 0, 1)]
         [InlineData("b9", 1, 8)]
         [InlineData("C7", 2, 6)]
@@ -47,10 +57,10 @@ namespace Battleships.Logic.Tests
         [InlineData("Z100", 25, 99)]
         public void Parse_CorrectCoords_ReturnsArrayCoords(string coords, int expectedColumn, int expectedRow)
         {
-            var (column, row) = _sut.Parse(coords);
+            var result = _sut.Parse(coords);
 
-            column.Should().Be(expectedColumn);
-            row.Should().Be(expectedRow);
+            result.Column.Should().Be(expectedColumn);
+            result.Row.Should().Be(expectedRow);
         }
     }
 }

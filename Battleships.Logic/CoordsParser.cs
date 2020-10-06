@@ -4,7 +4,7 @@ namespace Battleships.Logic
 {
     public class CoordsParser
     {
-        public (int column, int row) Parse(string coordinates)
+        public BoardCoordinates Parse(string coordinates)
         {
             if (coordinates.Length < 2)
             {
@@ -23,11 +23,16 @@ namespace Battleships.Logic
             {
                 throw new MalformedCoordinateError();
             }
+            
+            if(rowValue <= 0)
+            {
+                throw new MalformedCoordinateError();
+            }
 
             var columnValue = (int) (column - 'A');
             rowValue -= 1;
 
-            return (columnValue, rowValue);
+            return new BoardCoordinates(columnValue, rowValue);
         }
 
         private static bool IsAsciiUppercaseLetter(char column)
