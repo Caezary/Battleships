@@ -55,7 +55,7 @@ namespace Battleships.Logic.Tests
         [InlineData("C7", 2, 6)]
         [InlineData("H10", 7, 9)]
         [InlineData("Z100", 25, 99)]
-        public void Parse_CorrectCoords_ReturnsArrayCoords(string coords, int expectedColumn, int expectedRow)
+        public void Parse_CorrectCoords_ReturnsArrayCoords(string coords, uint expectedColumn, uint expectedRow)
         {
             var result = _sut.Parse(coords);
 

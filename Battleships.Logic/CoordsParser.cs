@@ -20,7 +20,7 @@ namespace Battleships.Logic
                 throw new MalformedCoordinateError();
             }
 
-            if (!int.TryParse(row, out var rowValue))
+            if (!uint.TryParse(row, out var rowValue))
             {
                 throw new MalformedCoordinateError();
             }
@@ -30,7 +30,7 @@ namespace Battleships.Logic
                 throw new MalformedCoordinateError();
             }
 
-            var columnValue = (int) (column - 'A');
+            var columnValue = (uint) (column - 'A');
             rowValue -= 1;
 
             return new BoardCoordinates(columnValue, rowValue);

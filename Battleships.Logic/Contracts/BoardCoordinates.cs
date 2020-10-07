@@ -4,10 +4,10 @@ namespace Battleships.Logic.Contracts
 {
     public class BoardCoordinates : IEquatable<BoardCoordinates>
     {
-        public int Column { get; }
-        public int Row { get; }
+        public uint Column { get; }
+        public uint Row { get; }
 
-        public BoardCoordinates(int column, int row)
+        public BoardCoordinates(uint column, uint row)
         {
             Column = column;
             Row = row;
@@ -32,7 +32,7 @@ namespace Battleships.Logic.Contracts
         {
             unchecked
             {
-                return (Column * 397) ^ Row;
+                return ((int) Column * 397) ^ (int) Row;
             }
         }
 
