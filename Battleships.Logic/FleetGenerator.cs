@@ -31,7 +31,8 @@ namespace Battleships.Logic
             var takenSquares = new HashSet<BoardCoordinates>();
 
             return shipSizesToGenerate
-                .Select(shipSize => GenerateNonCollidingShipCoords(shipSize, takenSquares));
+                .Select(shipSize => GenerateNonCollidingShipCoords(shipSize, takenSquares))
+                .ToList();
         }
 
         private BoardCoordinates[] GenerateNonCollidingShipCoords(uint shipSize, ISet<BoardCoordinates> takenSquares)
