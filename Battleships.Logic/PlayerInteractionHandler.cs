@@ -1,10 +1,9 @@
-﻿using System;
-using Battleships.Logic.Contracts;
+﻿using Battleships.Logic.Contracts;
 using Battleships.Logic.Exceptions;
 
 namespace Battleships.Logic
 {
-    public class PlayerInteractionHandler
+    public class PlayerInteractionHandler : IHandlePlayerInteraction
     {
         private readonly IParseCoords _coordsParser;
         private readonly ISuperviseFleet _fleetSupervisor;
