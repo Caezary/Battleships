@@ -7,5 +7,6 @@ namespace Battleships.Logic.Contracts
         void Missed(BoardCoordinates coords);
         void GotHit(BoardCoordinates coords);
         void Sunken(IEnumerable<BoardCoordinates> sunkenShipCoords);
+        void ResetGame();
     }
 }

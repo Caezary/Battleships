@@ -13,9 +13,12 @@ namespace Battleships.Logic.Construction
         private ShipGenerationDescriptor[] _initialFleet = Defaults.InitialFleet;
         private IUpdateBoardView _boardViewUpdater = new BoardViewUpdaterNullObject();
 
-        public GameFlowBuilder WithBoardSize(uint columns, uint rows)
+        public GameFlowBuilder WithBoardSize(uint columns, uint rows) =>
+            WithBoardSize(new BoardCoordinates(columns, rows));
+
+        public GameFlowBuilder WithBoardSize(BoardCoordinates boardSizeBounds)
         {
-            _boardSizeBounds = new BoardCoordinates(columns, rows);
+            _boardSizeBounds = boardSizeBounds;
             return this;
         }
 
@@ -33,7 +36,7 @@ namespace Battleships.Logic.Construction
 
         public GameFlowFacade Build()
         {
-            return new GameFlowFacade(GameStateFactoryMethod);
+            return new GameFlowFacade(_boardViewUpdater, GameStateFactoryMethod);
         }
 
         private IHandlePlayerInteraction GameStateFactoryMethod()

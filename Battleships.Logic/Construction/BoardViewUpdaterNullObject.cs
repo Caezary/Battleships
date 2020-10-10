@@ -16,5 +16,9 @@ namespace Battleships.Logic.Construction
         public void Sunken(IEnumerable<BoardCoordinates> sunkenShipCoords)
         {
         }
+
+        public void ResetGame()
+        {
+        }
     }
 }

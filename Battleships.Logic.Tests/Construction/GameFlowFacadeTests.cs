@@ -9,12 +9,13 @@ namespace Battleships.Logic.Tests.Construction
 {
     public class GameFlowFacadeTests
     {
+        private readonly Mock<IUpdateBoardView> _boardViewUpdaterMock = new Mock<IUpdateBoardView>();
         private readonly Mock<IHandlePlayerInteraction> _interactionHandlerMock = new Mock<IHandlePlayerInteraction>();
         private readonly GameFlowFacade _sut;
 
         public GameFlowFacadeTests()
         {
-            _sut = new GameFlowFacade(() => _interactionHandlerMock.Object); 
+            _sut = new GameFlowFacade(_boardViewUpdaterMock.Object, () => _interactionHandlerMock.Object); 
         }
 
         [Fact]
@@ -26,11 +27,12 @@ namespace Battleships.Logic.Tests.Construction
                 factoryMethodCalled = true;
                 return _interactionHandlerMock.Object;
             }
-            var sut = new GameFlowFacade(FactoryMethodMock);
+            var sut = new GameFlowFacade(_boardViewUpdaterMock.Object, FactoryMethodMock);
             
             sut.GenerateNewGame();
 
             factoryMethodCalled.Should().BeTrue();
+            _boardViewUpdaterMock.Verify(u => u.ResetGame());
         }
 
         [Fact]

@@ -6,12 +6,15 @@ namespace Battleships.Logic.Construction
 {
     public class GameFlowFacade
     {
+        private readonly IUpdateBoardView _boardViewUpdater;
         private readonly Func<IHandlePlayerInteraction> _gameStateFactoryMethod;
         private IHandlePlayerInteraction _interactionHandler;
         private GameActionOutcome _currentOutcome = GameActionOutcome.Error;
 
-        public GameFlowFacade(Func<IHandlePlayerInteraction> gameStateFactoryMethod)
+        public GameFlowFacade(
+            IUpdateBoardView boardViewUpdater, Func<IHandlePlayerInteraction> gameStateFactoryMethod)
         {
+            _boardViewUpdater = boardViewUpdater;
             _gameStateFactoryMethod = gameStateFactoryMethod;
             _interactionHandler = _gameStateFactoryMethod();
         }
@@ -19,6 +22,7 @@ namespace Battleships.Logic.Construction
         public void GenerateNewGame()
         {
             _interactionHandler = _gameStateFactoryMethod();
+            _boardViewUpdater.ResetGame();
             _currentOutcome = GameActionOutcome.Error;
         }
 
