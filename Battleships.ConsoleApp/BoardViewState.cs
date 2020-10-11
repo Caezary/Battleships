@@ -16,8 +16,7 @@ namespace Battleships.ConsoleApp
 
         public BoardViewState(BoardCoordinates dimensions)
         {
-            Board = new TextBlock[dimensions.Column][];
-            GenerateBoard(dimensions);
+            Board = GenerateBoard(dimensions);
         }
 
         public void Missed(BoardCoordinates coords)
@@ -47,18 +46,14 @@ namespace Battleships.ConsoleApp
             }
         }
 
-        private void GenerateBoard(BoardCoordinates dimensions)
-        {
-            Enumerable.Range(0, (int) dimensions.Column)
-                .ToList()
-                .ForEach(c => Board[c] = GenerateRow(dimensions));
-        }
+        private static TextBlock[][] GenerateBoard(BoardCoordinates dimensions) =>
+            dimensions.GetColumnRange()
+                .Select(_ => GenerateRow(dimensions))
+                .ToArray();
 
-        private static TextBlock[] GenerateRow(BoardCoordinates dimensions)
-        {
-            return Enumerable.Range(0, (int) dimensions.Row)
+        private static TextBlock[] GenerateRow(BoardCoordinates dimensions) =>
+            dimensions.GetRowRange()
                 .Select(r => new TextBlock())
                 .ToArray();
-        }
     }
 }

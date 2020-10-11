@@ -150,8 +150,8 @@ Try typing:
         {
             var board = CreateBoard(boardSizeBounds);
 
-            var columns = Enumerable.Range(0, (int) boardSizeBounds.Column).ToList();
-            var rows = Enumerable.Range(0, (int) boardSizeBounds.Row).ToList();
+            var columns = boardSizeBounds.GetColumnRange().ToList();
+            var rows = boardSizeBounds.GetRowRange().ToList();
 
             CreateColumnHeaders(columns, board);
             CreateRowHeaders(rows, board);
