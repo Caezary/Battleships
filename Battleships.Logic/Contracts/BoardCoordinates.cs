@@ -2,7 +2,7 @@
 
 namespace Battleships.Logic.Contracts
 {
-    public class BoardCoordinates : IEquatable<BoardCoordinates>
+    public readonly struct BoardCoordinates : IEquatable<BoardCoordinates>
     {
         public uint Column { get; }
         public uint Row { get; }
@@ -13,17 +13,14 @@ namespace Battleships.Logic.Contracts
             Row = row;
         }
         
-        public bool Equals(BoardCoordinates? other)
+        public bool Equals(BoardCoordinates other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
             return Column == other.Column && Row == other.Row;
         }
 
         public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
             return Equals((BoardCoordinates) obj);
         }
